@@ -5,24 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab2"
-        android:layout_width="85dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
         app:srcCompat = "@android:drawable/ic_menu_save"
-
         />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_numbers"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_numbers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </android.support.design.widget.CoordinatorLayout>
