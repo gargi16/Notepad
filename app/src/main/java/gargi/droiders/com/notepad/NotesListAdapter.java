@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.NotesViewHolder> {
 
+final private ListItemClickListener mClickListener ;
 
     private Cursor mCursor;
 
-    public NotesListAdapter(Cursor cursor) {
+    public NotesListAdapter(ListItemClickListener mClickListener, Cursor cursor) {
+        this.mClickListener = mClickListener;
         this.mCursor = cursor;
     }
 
@@ -77,6 +79,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.Note
         public void onClick(View view) {
             int clickedPosition = getAdapterPosition();
             long id = (long) view.getTag();
+            mClickListener.onListItemClick(clickedPosition, id);
         }
     }
     void swapCursor(Cursor cursor){

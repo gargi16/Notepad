@@ -4,23 +4,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-import static com.google.android.gms.common.api.Status.sq;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NotesListAdapter.ListItemClickListener {
 
     private FloatingActionButton openNoteBtn ;
     private NotesListAdapter mAdapter ;
@@ -46,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mAdapter = new NotesListAdapter(getNotes());
+        mAdapter = new NotesListAdapter(this, getNotes());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -62,4 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 null,null,null,null ,null,null,null);
     }
 
+    @Override
+    public void onListItemClick(int clickedItemIndex, long id) {
+        Intent intent = new Intent(MainActivity.this , SaveNoteActivity.class);
+        startActivity(intent);
+    }
 }
