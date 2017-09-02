@@ -41,6 +41,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 String message = textValue.getText().toString();
                 Intent intent = new Intent(CameraActivity.this,SaveNoteActivity.class);
                 intent.putExtra("ocr",true);
+                intent.putExtra("message",message);
                 startActivity(intent);
             }
         });

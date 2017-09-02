@@ -36,6 +36,10 @@ public class SaveNoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final long id = intent.getLongExtra("identity", -1);
+        if (intent.getBooleanExtra("ocr",false)){
+            String message = intent.getStringExtra("message");
+            content_editText.setText(message);
+        }
         Toast.makeText(this, "id =" + id, Toast.LENGTH_SHORT).show();
         useCameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +64,15 @@ public class SaveNoteActivity extends AppCompatActivity {
 
             title = cursor.getString(cursor.getColumnIndex(NotesContractClass.NoteListEntry.COLUMN_NOTES_TITLE));
             text = cursor.getString(cursor.getColumnIndex(NotesContractClass.NoteListEntry.COLUMN_NOTES_TEXT));
+            useCameraBtn.setVisibility(View.GONE);
 
             title_editText.setText(title);
             content_editText.setText(text);
             database.close();
-        } else
+        } else {
             buttonDelete.setVisibility(View.GONE);
+            useCameraBtn.setVisibility(View.VISIBLE);
+        }
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
