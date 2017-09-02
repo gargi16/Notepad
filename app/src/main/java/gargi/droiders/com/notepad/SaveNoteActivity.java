@@ -1,5 +1,6 @@
 package gargi.droiders.com.notepad;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,7 +35,14 @@ public class SaveNoteActivity extends AppCompatActivity {
 
                 Toast.makeText(SaveNoteActivity.this,"Note id :"+ id, Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(SaveNoteActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+
             }
         });
+
+
     }
 }

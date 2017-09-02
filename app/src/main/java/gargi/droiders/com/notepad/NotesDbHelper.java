@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
+import android.util.Log;
 
+import static android.R.attr.id;
 import static android.R.string.no;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static android.icu.text.Normalizer.NO;
@@ -54,20 +56,42 @@ public class NotesDbHelper extends SQLiteOpenHelper {
         values.put(NotesContractClass.NoteListEntry.COLUMN_NOTES_TITLE, title);
         values.put(NotesContractClass.NoteListEntry.COLUMN_NOTES_TEXT, text);
 
-        // Inserting Row
+
         long id = sqLiteDatabase.insert(NotesContractClass.NoteListEntry.TABLE_NAME , null ,values);
         sqLiteDatabase.close();
-        // Closing database connection
+
         return id;
     }
+    long updateNote(String title , String text){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
-    /* Note getNote(String string){
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase() ;
-        Cursor cursor =sqLiteDatabase.query(NotesContractClass.NoteListEntry.TABLE_NAME, new String[])
-
-    }   */
-
-
+        ContentValues values = new ContentValues();
+        values.put(NotesContractClass.NoteListEntry.COLUMN_NOTES_TITLE,title);
+        values.put(NotesContractClass.NoteListEntry.COLUMN_NOTES_TEXT,text);
 
 
-}
+
+       return id;
+    }
+
+
+    public void deleteNote(Note note)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(NotesContractClass.NoteListEntry.TABLE_NAME, NotesContractClass.NoteListEntry._ID  + " = ?",
+                new String[] { String.valueOf(note.getmId()) });
+        sqLiteDatabase.close();
+    }
+
+    long getNotesCount(){
+        String countQuery = "SELECT * FROM " + NotesContractClass.NoteListEntry.TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase =this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(countQuery,null);
+        cursor.close();
+        return cursor.getCount();
+    }
+
+
+
+    }
+
