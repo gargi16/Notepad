@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import static android.R.id.message;
+import static android.os.Build.VERSION_CODES.N;
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity implements NotesListAdapter.ListItemClickListener {
 
@@ -52,9 +58,12 @@ public class MainActivity extends AppCompatActivity implements NotesListAdapter.
                 null,null,null,null ,null,null,null);
     }
 
+
     @Override
     public void onListItemClick(int clickedItemIndex, long id) {
         Intent intent = new Intent(MainActivity.this , SaveNoteActivity.class);
+        intent.putExtra("identity" , id) ;
+
         startActivity(intent);
     }
 }

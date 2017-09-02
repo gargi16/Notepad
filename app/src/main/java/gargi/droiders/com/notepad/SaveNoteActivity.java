@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class SaveNoteActivity extends AppCompatActivity {
-    private  EditText title_editText ,content_editText ;
-    private  Button buttonSave ;
-    private TextInputLayout title_textInputLayout, content_textInputLayout ;
+    private EditText title_editText, content_editText;
+    private Button buttonSave;
+    private TextInputLayout title_textInputLayout, content_textInputLayout;
     private NotesDbHelper mDbhelper;
 
     @Override
@@ -22,27 +22,34 @@ public class SaveNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_content);
         title_editText = (EditText) findViewById(R.id.et_notes_title);
-        content_editText = (EditText) findViewById(R.id.et_notes_content) ;
+        content_editText = (EditText) findViewById(R.id.et_notes_content);
         buttonSave = (Button) findViewById(R.id.save_btn);
         mDbhelper = new NotesDbHelper(this);
+       //  Bundle bundle = getIntent().getExtras();
 
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = title_editText.getText().toString() ;
-                String contentText = content_editText.getText().toString();
-                long id = mDbhelper.addNote(title,contentText);
+          Intent intent = getIntent() ;
+        long id = intent.getLongExtra("identity",-1);
+        Toast.makeText(this , "id =" + id , Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(SaveNoteActivity.this,"Note id :"+ id, Toast.LENGTH_SHORT).show();
+            buttonSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String title = title_editText.getText().toString();
+                    String contentText = content_editText.getText().toString();
+                    long id = mDbhelper.addNote(title, contentText);
 
-                Intent intent = new Intent(SaveNoteActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                    Toast.makeText(SaveNoteActivity.this, "Note id :" + id, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(SaveNoteActivity.this, MainActivity.class);
+
+                    startActivity(intent);
+                    finish();
 
 
-            }
-        });
+                }
+            });
 
 
+        }
     }
-}
+
