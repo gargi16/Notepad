@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class SaveNoteActivity extends AppCompatActivity {
     private EditText title_editText, content_editText;
     private Button buttonSave;
+    private Button useCameraBtn;
     private TextInputLayout title_textInputLayout, content_textInputLayout;
     private NotesDbHelper mDbhelper;
 
@@ -25,11 +26,19 @@ public class SaveNoteActivity extends AppCompatActivity {
         content_editText = (EditText) findViewById(R.id.et_notes_content);
         buttonSave = (Button) findViewById(R.id.save_btn);
         mDbhelper = new NotesDbHelper(this);
+        useCameraBtn = (Button) findViewById(R.id.add_camera_btn);
        //  Bundle bundle = getIntent().getExtras();
 
           Intent intent = getIntent() ;
         long id = intent.getLongExtra("identity",-1);
         Toast.makeText(this , "id =" + id , Toast.LENGTH_SHORT).show();
+        useCameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SaveNoteActivity.this,CameraActivity.class);
+                startActivity(intent);
+            }
+        });
 
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
