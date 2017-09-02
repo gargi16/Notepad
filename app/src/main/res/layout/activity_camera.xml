@@ -36,6 +36,13 @@
         android:id="@+id/read_text"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept Text"
+        android:id="@+id/accept_text"
+        android:layout_alignParentBottom="true"
+        />
 
     <CheckBox
         android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private CompoundButton useFlash;
     private TextView statusMessage;
     private TextView textValue;
+    private Button acceptButton;
 
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "MainActivity";
@@ -31,6 +33,17 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
         autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
+        acceptButton = (Button) findViewById(R.id.accept_text);
+        acceptButton.setVisibility(View.GONE);
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String message = textValue.getText().toString();
+                Intent intent = new Intent(CameraActivity.this,SaveNoteActivity.class);
+                intent.putExtra("ocr",true);
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.read_text).setOnClickListener(this);
     }
@@ -83,6 +96,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     statusMessage.setText(R.string.ocr_success);
                     textValue.setText(text);
                     Log.d(TAG, "Text read: " + text);
+                    acceptButton.setVisibility(View.VISIBLE);
                 } else {
                     statusMessage.setText(R.string.ocr_failure);
                     Log.d(TAG, "No Text captured, intent data is null");
