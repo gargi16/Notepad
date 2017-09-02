@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview
+    <gargi.droiders.com.notepad.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay
+        <gargi.droiders.com.notepad.camera.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview>
+    </gargi.droiders.com.notepad.camera.CameraSourcePreview>
 
 </LinearLayout>
