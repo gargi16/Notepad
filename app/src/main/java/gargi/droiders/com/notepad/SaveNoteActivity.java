@@ -11,12 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static android.R.attr.button;
 import static com.google.android.gms.common.api.Status.sq;
 import static gargi.droiders.com.notepad.NotesContractClass.NoteListEntry.COLUMN_USER_NAME;
 
 public class SaveNoteActivity extends AppCompatActivity {
     private EditText title_editText, content_editText;
-    private Button buttonSave;
+    private Button buttonSave , buttonDelete;
     private TextInputLayout title_textInputLayout, content_textInputLayout;
     private NotesDbHelper mDbhelper;
 
@@ -29,6 +30,7 @@ public class SaveNoteActivity extends AppCompatActivity {
         title_editText = (EditText) findViewById(R.id.et_notes_title);
         content_editText = (EditText) findViewById(R.id.et_notes_content);
         buttonSave = (Button) findViewById(R.id.save_btn);
+        buttonDelete = (Button) findViewById(R.id.delete_btn) ;
         mDbhelper = new NotesDbHelper(this);
 
 
@@ -56,6 +58,8 @@ public class SaveNoteActivity extends AppCompatActivity {
             content_editText.setText(text);
             database.close();
         }
+        else
+            buttonDelete.setVisibility(View.GONE);
 
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +92,18 @@ public class SaveNoteActivity extends AppCompatActivity {
             });
 
 
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    mDbhelper.deleteNote(id);
+
+                Intent intent = new Intent(SaveNoteActivity.this, MainActivity.class);
+
+                startActivity(intent);
+                finish();
+
+            }
+        });
         }
     }
 

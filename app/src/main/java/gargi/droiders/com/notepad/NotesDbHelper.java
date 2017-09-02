@@ -67,11 +67,13 @@ public class NotesDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void deleteNote(Note note) {
+    int deleteNote(long id) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.delete(NotesContractClass.NoteListEntry.TABLE_NAME, NotesContractClass.NoteListEntry._ID + " = ?",
-                new String[]{String.valueOf(note.getmId())});
-        sqLiteDatabase.close();
+
+       return sqLiteDatabase.delete(NotesContractClass.NoteListEntry.TABLE_NAME, "_id= " + id , null) ;
+
+        // sqLiteDatabase.close();
+
     }
 
     long getNotesCount() {

@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.R.id.message;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements NotesListAdapter.
     private NotesListAdapter mAdapter ;
     private RecyclerView mRecyclerView ;
     NotesDbHelper dbHelper;
+    private TextView textView ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NotesListAdapter.
 
     }
 
-    private Cursor getNotes(){
+    public Cursor getNotes(){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         return database.query(NotesContractClass.NoteListEntry.TABLE_NAME ,
                 null,null,null,null ,null,null,null);
