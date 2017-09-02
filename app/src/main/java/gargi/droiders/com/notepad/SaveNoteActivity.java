@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import static android.R.attr.button;
+//import static com.google.android.gms.common.api.Status.sq;
+import static gargi.droiders.com.notepad.NotesContractClass.NoteListEntry.COLUMN_USER_NAME;
+
+
 public class SaveNoteActivity extends AppCompatActivity {
     private EditText title_editText, content_editText;
     private Button buttonSave, buttonDelete;
